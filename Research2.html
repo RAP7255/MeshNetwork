@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline Mesh-Based Emergency Alert System</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .bg-gradient-custom {
+            background-image: linear-gradient(to right, #00C6FF, #0072FF);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Modal for Hardware Design -->
+    <div id="hardware-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl shadow-2xl p-8 max-w-2xl mx-4 relative transform transition-all duration-300 scale-95 opacity-0" id="modal-content">
+            <button onclick="toggleModal('hardware-modal')" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <h3 class="text-2xl font-bold mb-4">Hardware SOS Button Design</h3>
+            <p class="text-gray-600 mb-6">
+                This simple, low-power BLE device acts as a physical trigger for the emergency alert system. It's designed for quick, discreet use in high-stress situations.
+            </p>
+            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <pre class="whitespace-pre-wrap text-sm text-gray-700"><code>Microcontroller: Nordic nRF52832 / ESP32
+Power: CR2032 Coin Cell (long battery life)
+Signal: BLE GATT service broadcast
+Interface: Single press-button, optional LED feedback
+
+// Pseudocode for message handling
+if (bleMessage.uuid == SOS_UUID) {
+    if (bleMessage.data == "SOS_SIGNAL") {
+        triggerMeshSOSBroadcast()
+    }
+}</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Section -->
+    <header class="sticky top-0 bg-white shadow-lg z-40">
+        <nav class="container mx-auto p-4 flex items-center justify-between">
+            <a href="#" class="text-2xl font-bold text-gray-800">Emergency Alert System</a>
+            <div class="space-x-4 hidden md:flex">
+                <a href="#how-it-works" class="text-gray-600 hover:text-gray-900 transition-colors">How it Works</a>
+                <a href="#technology" class="text-gray-600 hover:text-gray-900 transition-colors">Technology</a>
+                <a href="#applications" class="text-gray-600 hover:text-gray-900 transition-colors">Applications</a>
+            </div>
+            <a href="#contact" class="bg-gradient-custom text-white px-6 py-2 rounded-full font-semibold shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5">Contact Us</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="bg-gradient-custom text-white py-24 text-center">
+            <div class="container mx-auto px-4">
+                <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-4">Stay Connected When It Matters Most</h1>
+                <p class="text-xl md:text-2xl max-w-3xl mx-auto mb-8">A resilient, decentralized emergency communication network that works offline, powered by Bluetooth Low Energy (BLE) Mesh.</p>
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#how-it-works" class="bg-white text-gray-800 font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5">Learn More</a>
+                    <a href="#applications" class="bg-transparent border-2 border-white text-white font-semibold px-8 py-3 rounded-full hover:bg-white hover:text-gray-800 transition-colors duration-300">See Applications</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Problem Statement Section -->
+        <section class="bg-white py-20">
+            <div class="container mx-auto px-4 text-center max-w-4xl">
+                <h2 class="text-4xl font-bold mb-4 text-gray-800">The Problem We're Solving</h2>
+                <p class="text-lg text-gray-600 leading-relaxed mb-8">
+                    During natural disasters, power outages, or infrastructure collapse, traditional communication networks often fail. This leaves communities isolated without access to emergency services or coordination. We are building a critical lifeline that ensures message delivery among disconnected users, even when the world goes dark.
+                </p>
+                <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 justify-center">
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-satellite-dish text-red-500 text-2xl"></i>
+                        <span class="text-gray-700">Dependent on fragile infrastructure</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-battery-three-quarters text-yellow-500 text-2xl"></i>
+                        <span class="text-gray-700">High power consumption</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-wifi text-blue-500 text-2xl"></i>
+                        <span class="text-gray-700">Fails in offline scenarios</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section with Diagram Description -->
+        <section id="how-it-works" class="bg-gray-50 py-20">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center mb-12">How Our System Creates a Resilient Mesh</h2>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-8">
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 w-10 h-10 bg-gradient-custom text-white rounded-full flex items-center justify-center font-bold">1</div>
+                            <div>
+                                <h3 class="text-xl font-bold">BLE Mesh Networking</h3>
+                                <p class="text-gray-600">Smartphones and dedicated hardware devices automatically form a decentralized mesh topology. Each device acts as a relay node, passing messages to extend the network's range.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 w-10 h-10 bg-gradient-custom text-white rounded-full flex items-center justify-center font-bold">2</div>
+                            <div>
+                                <h3 class="text-xl font-bold">One-Tap Software SOS</h3>
+                                <p class="text-gray-600">The mobile app provides a simple interface to broadcast an emergency alert to all reachable nodes in the network with a single tap.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 w-10 h-10 bg-gradient-custom text-white rounded-full flex items-center justify-center font-bold">3</div>
+                            <div>
+                                <h3 class="text-xl font-bold">Hardware SOS Button Integration</h3>
+                                <p class="text-gray-600">A dedicated, low-power BLE button allows for instant emergency alerts, ideal for high-stress situations or for users with limited mobility. <button onclick="toggleModal('hardware-modal')" class="text-blue-600 font-semibold hover:underline">Learn more.</button></p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 w-10 h-10 bg-gradient-custom text-white rounded-full flex items-center justify-center font-bold">4</div>
+                            <div>
+                                <h3 class="text-xl font-bold">Store-and-Forward Logic</h3>
+                                <p class="text-gray-600">If a message cannot be delivered immediately, it's cached locally and automatically forwarded once a new connection is established, ensuring reliable message delivery even in disconnected environments.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-white rounded-xl shadow-lg border border-gray-200">
+                        <h3 class="text-2xl font-bold mb-4">System Diagram Concept</h3>
+                        <p class="text-gray-600 mb-4">
+                            Visualize a decentralized network. A diagram would show several smartphone icons and a single hardware button, all interconnected by dashed lines to form a mesh. A central, faded-out cloud icon labeled "Cellular/Internet" with a red 'X' through it would emphasize that the system operates independently. Messages are depicted as glowing packets moving between nodes. The hardware button's connection to a nearby phone would be highlighted, showing it triggers a new message into the mesh. This diagram illustrates the system's resilience and peer-to-peer nature.
+                        </p>
+                        <pre class="bg-gray-800 text-green-400 p-4 rounded-lg overflow-x-auto text-sm">
+                           ┌─────────┐
+                           │ User A  │  (Smartphone)
+                           └────┬────┘
+                                │
+                                │ BLE
+                                │  Mesh
+                                │   /
+          ┌─────────┐         ┌─▼─┐       ┌─────────┐
+          │ Hardware│  --BLE-->│User B│ --(Mesh)--> │ User C  │
+          │  Button │         └─▲─┘       └────┬────┘
+          └─────────┘           │              │
+                                │              │ BLE
+                                │              │  Mesh
+                                │              │
+                           ┌────▼────┐         ┌────▼────┐
+                           │ User D  │         │ User E  │
+                           └─────────┘         └─────────┘
+(A, B, C, D, E form a self-healing network without external infrastructure)
+                        </pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Section -->
+        <section id="technology" class="bg-white py-20">
+            <div class="container mx-auto px-4 text-center max-w-5xl">
+                <h2 class="text-4xl font-bold mb-12">Under the Hood: Our Core Technology</h2>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-md transform hover:scale-105 transition-transform duration-300">
+                        <i class="fas fa-shield-alt text-4xl text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Secure Communication</h3>
+                        <p class="text-gray-600 text-sm">All messages are encrypted using AES/RSA to ensure data privacy and authenticity, protecting sensitive information.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-md transform hover:scale-105 transition-transform duration-300">
+                        <i class="fas fa-rss text-4xl text-yellow-500 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Flooding Mesh Propagation</h3>
+                        <p class="text-gray-600 text-sm">A robust algorithm ensures every node that receives a message forwards it to its neighbors, guaranteeing full mesh coverage and rapid propagation.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-md transform hover:scale-105 transition-transform duration-300">
+                        <i class="fas fa-leaf text-4xl text-green-500 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Power-Efficient Design</h3>
+                        <p class="text-gray-600 text-sm">The app uses low-energy BLE scanning intervals and background operation to preserve battery life, making it a reliable tool for extended periods.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-md transform hover:scale-105 transition-transform duration-300">
+                        <i class="fas fa-random text-4xl text-purple-500 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Adaptive Hopping</h3>
+                        <p class="text-gray-600 text-sm">Adaptive Frequency Hopping dynamically switches between 40 BLE channels to reduce the risk of jamming and ensure reliable signal transmission.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Real-World Scenarios Section -->
+        <section class="bg-gray-100 py-20">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-4xl font-bold mb-12">Real-World Resilience</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-white p-6 rounded-xl shadow-md border-b-4 border-blue-500">
+                        <h3 class="text-2xl font-bold mb-2">No Network</h3>
+                        <p class="text-gray-600">The system uses its BLE mesh to relay messages offline, completely bypassing the need for cellular towers or Wi-Fi.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md border-b-4 border-yellow-500">
+                        <h3 class="text-2xl font-bold mb-2">Power Blackout</h3>
+                        <p class="text-gray-600">Our solution is designed to operate on minimal power, allowing it to function for extended periods on a device's battery.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md border-b-4 border-green-500">
+                        <h3 class="text-2xl font-bold mb-2">Partial Connectivity</h3>
+                        <p class="text-gray-600">Cached messages are auto-rerouted and forwarded when new nodes join the mesh, ensuring delivery even with intermittent connections.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md border-b-4 border-red-500">
+                        <h3 class="text-2xl font-bold mb-2">High-Stress Situations</h3>
+                        <p class="text-gray-600">The dedicated hardware button enables users to trigger an emergency alert instantly, without needing to interact with their phone.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Applications Section -->
+        <section id="applications" class="bg-white py-20">
+            <div class="container mx-auto px-4 text-center max-w-4xl">
+                <h2 class="text-4xl font-bold mb-12">Who Can Use This?</h2>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="flex flex-col items-center p-6 bg-gray-50 rounded-xl shadow-md">
+                        <i class="fas fa-house-damage text-5xl text-gray-500 mb-4"></i>
+                        <h3 class="text-2xl font-bold mb-2">Disaster Response</h3>
+                        <p class="text-gray-600">Provides a reliable communication lifeline in disaster-prone regions.</p>
+                    </div>
+                    <div class="flex flex-col items-center p-6 bg-gray-50 rounded-xl shadow-md">
+                        <i class="fas fa-hiking text-5xl text-gray-500 mb-4"></i>
+                        <h3 class="text-2xl font-bold mb-2">Outdoor Activities</h3>
+                        <p class="text-gray-600">Ensures safety for trekking and hiking groups in remote areas without signal.</p>
+                    </div>
+                    <div class="flex flex-col items-center p-6 bg-gray-50 rounded-xl shadow-md">
+                        <i class="fas fa-user-shield text-5xl text-gray-500 mb-4"></i>
+                        <h3 class="text-2xl font-bold mb-2">Community Safety</h3>
+                        <p class="text-gray-600">Empowers neighborhoods with a decentralized safety and alert system.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 Offline Mesh-Based Emergency Alert System. All rights reserved.</p>
+            <p></p>
+            <p class="mt-2 text-gray-400">Redefining emergency connectivity — reliable, offline, and always ready.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Function to toggle the modal
+        function toggleModal(modalId) {
+            const modal = document.getElementById(modalId);
+            const modalContent = document.getElementById('modal-content');
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modalContent.classList.remove('scale-95', 'opacity-0');
+                    modalContent.classList.add('scale-100', 'opacity-100');
+                }, 10);
+            } else {
+                modalContent.classList.remove('scale-100', 'opacity-100');
+                modalContent.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300); // Wait for the transition to finish
+            }
+        }
+    </script>
+</body>
+</html>
