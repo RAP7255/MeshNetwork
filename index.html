@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Offline Mesh-Based Emergency Alert System</title>
+    <include rel="icon" href="favicon.ico">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,22 +54,22 @@ if (bleMessage.uuid == SOS_UUID) {
         </div>
     </div>
 
-    <header class="sticky top-0 bg-white dark:bg-gray-800 shadow-lg z-40 transition-colors duration-300">
-        <nav class="container mx-auto p-4 flex items-center justify-between">
-            <a href="#" class="text-2xl font-bold text-gray-800 dark:text-white">Emergency Alert System</a>
-            <div class="space-x-4 hidden md:flex items-center">
-                <a href="#how-it-works" class="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors">How it Works</a>
-                <a href="#technology" class="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors">Technology</a>
-                <a href="#applications" class="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors">Applications</a>
-            </div>
-            <div class="flex items-center space-x-4">
-                <button id="theme-toggle" class="p-2 rounded-full text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300" onclick="toggleDarkMode()">
-                    <i id="theme-toggle-icon" class="fas fa-moon text-lg"></i>
-                </button>
-                <a href="#contact" class="bg-gradient-custom text-white px-6 py-2 rounded-full font-semibold shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5">Contact Us</a>
-            </div>
-        </nav>
-    </header>
+  <header class="sticky top-0 bg-white dark:bg-gray-800 shadow-lg z-40 transition-colors duration-300">
+    <nav class="container mx-auto p-4 flex items-center justify-between">
+        <a href="#" class="text-2xl font-bold text-gray-800 dark:text-white">Offline Mesh-Based Emergency Alert System</a>
+        <div class="space-x-4 hidden md:flex items-center">
+            <a href="#how-it-works" class="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors">How it Works</a>
+            <a href="#technology" class="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors">Technology</a>
+            <a href="#applications" class="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors">Applications</a>
+        </div>
+        <div class="flex items-center space-x-4">
+            <button id="theme-toggle" class="p-2 rounded-full text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300" onclick="toggleDarkMode()">
+                <i id="theme-toggle-icon" class="fas fa-moon text-lg"></i>
+            </button>
+            <a href="/path/to/your/report.pdf" download class="bg-gradient-custom text-white px-6 py-2 rounded-full font-semibold shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5">Download Report</a>
+        </div>
+    </nav>
+</header>
 
     <main>
         <section class="bg-gradient-custom text-white py-24 text-center">
@@ -245,13 +246,15 @@ if (bleMessage.uuid == SOS_UUID) {
         </section>
     </main>
 
-    <footer class="bg-gray-800 text-white py-12 transition-colors duration-300">
-        <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2025 Offline Mesh-Based Emergency Alert System. All rights reserved.</p>
-            <p></p>
-            <p class="mt-2 text-gray-400">Redefining emergency connectivity — reliable, offline, and always ready.</p>
-        </div>
-    </footer>
+  <footer class="bg-gray-800 text-white py-12 transition-colors duration-300">
+    <div class="container mx-auto px-4 text-center">
+        <p class="text-sm">
+            &copy; 2025 Offline Mesh-Based Emergency Alert System. All rights reserved.
+            <span class="block mt-1 text-gray-400">Created by: [Rajvardhan,Chaitanya ,Audumbar,Omkar]</span>
+        </p>
+        <p class="mt-4 text-gray-400">Redefining emergency connectivity — reliable, offline, and always ready.</p>
+    </div>
+</footer>
 
     <script>
         // Smooth scrolling for navigation links
@@ -318,5 +321,6 @@ if (bleMessage.uuid == SOS_UUID) {
             }
         }
     </script>
+    
 </body>
 </html>
